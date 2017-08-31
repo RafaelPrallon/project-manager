@@ -38,7 +38,11 @@ gem 'sendgrid-ruby'
 
 gem 'slack-notifier'
 gem 'devise'
-gem 'bootstrap-sass'
+
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
+
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
