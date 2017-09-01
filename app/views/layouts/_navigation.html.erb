@@ -8,9 +8,13 @@
     <a class="navbar-brand" href="#">ProjectManager</a>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Link1", "/path1"  %></li>
-        <li><%= link_to "Link2", "/path2"  %></li>
-        <li><%= link_to "Link3", "/path3"  %></li>
+        <% if signed_in? %>
+          <li><%= link_to "Link1", "/path1"  %></li>
+          <li><%= link_to "Desconectar", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Conectar", new_user_session_path %></li>
+          <li><%= link_to "Registrar", new_user_registration_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
