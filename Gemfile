@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'friendly_id', '~> 5.2', '>= 5.2.1'
 gem 'jquery-rails'
 
 # Use Sendgrid to send email for users
@@ -49,6 +50,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
