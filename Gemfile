@@ -33,24 +33,24 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+gem 'devise-bootstrap-views'
+gem 'jquery-rails'
+
 # Use Sendgrid to send email for users
 gem 'sendgrid-ruby'
 
 gem 'slack-notifier'
-gem 'devise'
 
 gem 'twitter-bootstrap-rails'
-gem 'devise-bootstrap-views'
-
-gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
