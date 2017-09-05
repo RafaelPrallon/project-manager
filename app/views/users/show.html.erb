@@ -1,17 +1,17 @@
 <h1><%= @user.full_name %></h1>
 <h2> Sobre </h2>
-<ul>
-  <li><h3><%= @user.full_name %></h3></li>
-  <li><h3><%= @user.email %></h3></li>
-</ul>
+
+<h3><%= @user.full_name %>
+<h3><%= @user.email %>
+
 <% if @user = current_user %>
   <%= link_to "editar dados cadastrais", edit_user_registration_path(@user),
                class: "btn btn-danger" %>
 <% end %>
 <h3> Projetos </h3>
-<% if @user.projects.count == 0 %>
+<% if @user_projects.length == 0 %>
   <h4>Este usuário não está envolvido em nenhum projeto </h4>
 <% else %>
-  <%= render 'projects/list', obj: @user.projects %>
+  <%= render 'projects/list', obj: @user_projects %>
 <% end %>
 <%= link_to  "Criar projeto", new_project_path, class: "btn btn-success" %>

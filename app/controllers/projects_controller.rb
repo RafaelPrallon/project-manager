@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
       flash[:success] = "O projeto #{@project.name} foi criado com sucesso"
       redirect_to projects_path
     else
-      flash[:warning] = "O projeto não pode ser criado"
+      flash[:warning] = 'O projeto não pode ser criado'
       render 'new'
     end
   end
@@ -30,20 +30,24 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       flash[:success] = "O projeto #{@project.name} foi atualizado com sucesso"
     else
-      flash[:warning] = "O projeto não pode ser atualizado"
+      flash[:warning] = 'O projeto não pode ser atualizado'
       render 'edit'
     end
   end
 
   def destroy
-    UserProject.where(project: @project).each &:destroy
+    @project = Project.friendly.find(params[:id])
+    UserProject.where(project: @project).each do |relationship|
+      relationship.destroy
+    end
     @project.destroy
-    flash[:danger] = "O projeto foi apagado com sucesso"
+    flash[:danger] = 'O projeto foi apagado com sucesso'
     redirect_to projects_path
   end
 
   private
-    def project_params
-      params.require(:project).permit(:name, :description)
-    end
+
+  def project_params
+    params.require(:project).permit(:name, :description)
+  end
 end
