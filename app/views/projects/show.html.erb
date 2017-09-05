@@ -3,7 +3,12 @@
 <p><%= @project.leader.full_name %></p>
 <%= render 'members' %>
 
-<%= link_to  "Editar", edit_project_path(@project), class:"btn btn-xs btn-success" %>
-<%= link_to 'Apagar', project_path(@project), :method => :delete, 
-                      :data => { :confirm => "Tem certeza disso?" },
-                      :class => "btn btn-xs btn-danger" %>
+<% if current_user == @project.leader %>
+  <%= link_to  "Editar", edit_project_path(@project), class:"btn btn-xs btn-success" %>
+  <%= link_to 'Apagar', project_path(@project), :method => :delete, 
+                        :data => { :confirm => "Tem certeza disso?" },
+                        :class => "btn btn-xs btn-danger" %>
+<% end %>
+<div class="row">
+link_to  "Reportar bug", bug_new_path
+</div>

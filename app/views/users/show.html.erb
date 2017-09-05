@@ -12,10 +12,6 @@
 <% if @user.projects.count == 0 %>
   <h4>Este usuário não está envolvido em nenhum projeto </h4>
 <% else %>
-  <ul>
-    <% @user.projects.each do |project| %>
-      <li><%= project.name %></li>
-    <% end %>
-  </ul>
+  <%= render 'projects/list', obj: @user.projects %>
 <% end %>
 <%= link_to  "Criar projeto", new_project_path, class: "btn btn-success" %>

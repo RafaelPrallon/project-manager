@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    UserProjects.where(project: @project).each &:destroy
+    UserProject.where(project: @project).each &:destroy
     @project.destroy
     flash[:danger] = "O projeto foi apagado com sucesso"
     redirect_to projects_path
