@@ -3,8 +3,11 @@
 <ul>
   <li><h3><%= @user.full_name %></h3></li>
   <li><h3><%= @user.email %></h3></li>
-  <li> <%= link_to "editar dados cadastrais", edit_user_registration_path(@user) if @user = current_user %></li>
 </ul>
+<% if @user = current_user %>
+  <%= link_to "editar dados cadastrais", edit_user_registration_path(@user),
+               class: "btn btn-danger" %>
+<% end %>
 <h3> Projetos </h3>
 <% if @user.projects.count == 0 %>
   <h4>Este usuário não está envolvido em nenhum projeto </h4>
@@ -15,3 +18,4 @@
     <% end %>
   </ul>
 <% end %>
+<%= link_to  "Criar projeto", new_project_path, class: "btn btn-success" %>

@@ -1,0 +1,9 @@
+<h1>Projeto <%= @project.name %></h1>
+<p><%= @project.description %></p>
+<p><%= @project.leader.full_name %></p>
+<%= render 'members' %>
+
+<%= link_to  "Editar", edit_project_path(@project), class:"btn btn-xs btn-success" %>
+<%= link_to 'Apagar', project_path(@project), :method => :delete, 
+                      :data => { :confirm => "Tem certeza disso?" },
+                      :class => "btn btn-xs btn-danger" %>

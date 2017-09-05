@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @project.users.each do |member| %>
+        <td><%= member.full_name %></td>
+        <td><%= member.email %></td>
+        <% if member == @project.leader %>
+          <td>Líder</td>
+        <% else %>
+          <td>Membro</td>
+        <% end %>
+        <td><%= link_to "Visitar página", user_path(member), class: 'btn btn-xs btn-success' %>
+            <% if current_user == @project.leader && member != @project.leader%>
+              <%= link_to  "Remover do projeto", user_project_path(user_project),
+                                              method: :delete,
+                                              :data => { :confirm => "Você tem certeza disso?" },
+                                              class: 'btn btn-xs btn-danger'%>
+            <% end %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
