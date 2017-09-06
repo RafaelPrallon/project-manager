@@ -1,4 +1,5 @@
 class BugsController < ApplicationController
+  before_action :set_project
   def index
     @bugs = Bug.all
   end
@@ -8,13 +9,20 @@ class BugsController < ApplicationController
   end
 
   def create
-    @bug = Bug.new(bug_params)
+    @bug = @project.bugs.build(bug_params)
     if @bug.save
-      flash[:success] = "O bug foi repostado"
-      redirect_to bug_path(@bug)
+      messeger = SlackMesseger.new
+      notifier = messeger.generate_notifier
+      resumo = @bug.description.truncate(27, separator: ' ')
+      byebug
+      flash[:notice] = 'O bug foi reportado'
+      message = "Um bug foi reportado no projeto #{@bug.project.name}. Descrição resumida do erro: #{resumo}"
+      messeger.send_message(notifier, message)
+      redirect_to project_bug_path(@project, @bug)
     else
-      flash[:warning] = "O bug não pode ser reportado"
+      flash.now[:alert] = 'O bug não pode ser reportado'
       render 'new'
+    end
   end
 
   def show
@@ -28,15 +36,27 @@ class BugsController < ApplicationController
   def update
     @bug = Bug.find(params[:id])
     if @bug.update(project_params)
-      flash[:success] = "O bug foi atualizado com sucesso"
+      flash[:notice] = 'O bug foi atualizado com sucesso'
     else
-      flash[:warning] = 'O bug não pode ser atualizado'
+      flash[:alert] = 'O bug não pode ser atualizado'
       render 'edit'
     end
   end
 
   def destroy
     @bug = Bug.find(params[:id])
-    @bug.solved = true
+    @bug.destroy
+    flash[:notice] = 'O bug foi deletado com sucesso'
+    redirect_to project_bugs_path(@project)
+  end
+
+  private
+
+  def bug_params
+    params.require(:bug).permit(:title, :description, :status)
+  end
+
+  def set_project
+    @project = Project.friendly.find(params[:project_id])
   end
 end

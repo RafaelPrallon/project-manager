@@ -11,15 +11,16 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.users << current_user
     if @project.save
-      flash[:success] = "O projeto #{@project.name} foi criado com sucesso"
+      flash[:notice] = "O projeto #{@project.name} foi criado com sucesso"
       redirect_to projects_path
     else
-      flash[:warning] = 'O projeto não pode ser criado'
+      flash[:alert] = 'O projeto não pode ser criado'
       render 'new'
     end
   end
   def show
     @project = Project.friendly.find(params[:id])
+    @bugs = @project.bugs
   end
   def edit
     @project = Project.friendly.find(params[:id])
@@ -28,9 +29,9 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.friendly.find(params[:id])
     if @project.update(project_params)
-      flash[:success] = "O projeto #{@project.name} foi atualizado com sucesso"
+      flash[:notice] = "O projeto #{@project.name} foi atualizado com sucesso"
     else
-      flash[:warning] = 'O projeto não pode ser atualizado'
+      flash[:alert] = 'O projeto não pode ser atualizado'
       render 'edit'
     end
   end
