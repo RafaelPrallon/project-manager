@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Projeto</th>
+      <th>Comentários</th>
+      <th>Resolvido?</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% obj.each do |bug| %>
+    <tr>
+      <td><%= bug.title %></td>
+      <td><%= bug.project.name %></td>
+      <td> A implementar </td>
+      <td><%= bug.solved? %></td>
+      <td>
+        <%= link_to "Vizualizar", project_bug_path(@project, bug), class:"btn btn-xs btn-default"%>
+        <%= link_to 'Apagar', project_bug_path(@project, bug), 
+                              :method => :delete, 
+                              :data => { :confirm => "Tem certeza disso?" },
+                              :class => "btn btn-xs btn-danger" %>
+        </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
