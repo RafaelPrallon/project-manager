@@ -1,4 +1,35 @@
-<h1><%= @bug.title %></h1>
+<h1>Título: <%= @bug.title %></h1>
+<div class="description">
 <h2><%= @bug.description %></h2>
-<h2><%= @bug.project.name %></h2>
-<h2><%= @bug.solved %><h2
+</div>
+<h2>Projeto:<%= @bug.project.name %></h2>
+<h2>Foi resolvido? <%= @bug.solved %><h2>
+
+
+<%= render 'comments/form' %>
+
+<div class='col-md-12'>
+    <header>
+      <h2>Commentários</h2>
+    </header>
+    
+    <div class='col-md-10'>
+      <% if persisted_comments(@bug.comments).any? %>
+        <div>
+          <% persisted_comments(@comments).each do |comment| %>
+            <div class='wrapper'>
+              <%= comment.body %>
+            </div>
+          
+            <div>
+              <%= time_ago_in_words(comment.created_at) %>
+              ago by <%= comment.user.full_name %>
+            </div>
+            <hr>
+          <% end %>
+        </div>
+      <% else %>
+        Não há commentários.
+      <% end %>
+    </div>
+  </div>

@@ -26,6 +26,8 @@ class BugsController < ApplicationController
 
   def show
     @bug = Bug.find(params[:id])
+    @comments = @bug.comments
+    @comment = @bug.comments.build
   end
 
   def edit
