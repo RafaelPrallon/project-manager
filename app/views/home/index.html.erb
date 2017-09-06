@@ -1,2 +1,14 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="jumbotron">
+  <h2>Bem vindo ao Project Manager, aqui os usuários poderam registrar os seus projetos e relatar os seus bugs</h2>
+</div>
+
+<div class="row content-align-center">
+  <div class="col col-lg-5">
+    <%= link_to 'Para visualizar todos os projetos, clique aqui', projects_path,
+                    class:"btn btn-primary" %>
+  </div>
+  <div class="col col-lg-5">
+    <%= link_to 'Para visualizar todos os membros, clique aqui', users_path,
+                      class:"btn btn-primary" %>
+  </div>
+</div>

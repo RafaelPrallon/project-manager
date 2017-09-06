@@ -14,7 +14,6 @@ class BugsController < ApplicationController
       messeger = SlackMesseger.new
       notifier = messeger.generate_notifier
       resumo = @bug.description.truncate(27, separator: ' ')
-      byebug
       flash[:notice] = 'O bug foi reportado'
       message = "Um bug foi reportado no projeto #{@bug.project.name}. Descrição resumida do erro: #{resumo}"
       messeger.send_message(notifier, message)
