@@ -1,17 +1,21 @@
-<h1><%= @user.full_name %></h1>
-<h2> Sobre </h2>
+<div class= "user-show col-md col-md-12">
+  <h1><%= @user.full_name %></h1>
+  <h2> Sobre </h2>
 
-<h3><%= @user.full_name %>
-<h3><%= @user.email %>
+  <h3>Nome completo: <%= @user.full_name %></h3>
+  <h3>email de cadastro<%= @user.email %></h3>
 
-<% if @user = current_user %>
-  <%= link_to "editar dados cadastrais", edit_user_registration_path(@user),
-               class: "btn btn-danger" %>
-<% end %>
-<h3> Projetos </h3>
-<% if @user_projects.length == 0 %>
-  <h4>Este usuário não está envolvido em nenhum projeto </h4>
-<% else %>
-  <%= render 'projects/list', obj: @user_projects %>
-<% end %>
-<%= link_to  "Criar projeto", new_project_path, class: "btn btn-success" %>
+  <% if @user == current_user %>
+    <%= link_to "editar dados cadastrais", edit_user_registration_path(@user),
+                class: "btn btn-danger" %>
+  <% end %>
+  <h3> Projetos </h3>
+  <% if @user_projects.length == 0 %>
+    <h4>Este usuário não está envolvido em nenhum projeto </h4>
+  <% else %>
+    <%= render 'projects/list', obj: @user_projects %>
+  <% end %>
+  <% if current_user == @user %>
+    <%= link_to  "Criar projeto", new_project_path, class: "btn btn-success" %>
+  <% end %>
+</div>

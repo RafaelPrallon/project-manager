@@ -10,19 +10,19 @@
         <%= f.email_field :email, autofocus: true, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :first_name %>
+        <%= f.label :nome %>
         <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :last_name %>
+        <%= f.label :sobrenome %>
         <%= f.text_field :last_name, autofocus: true, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :password %>
+        <%= f.label :senha %>
         <%= f.password_field :password, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :password_confirmation %>
+        <%= f.label :confirme_a_senha %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
       <%= f.submit t('.sign_up', default: 'Sign up'), class: 'btn btn-primary' %>
