@@ -36,10 +36,23 @@ class BugsController < ApplicationController
 
   def update
     @bug = Bug.find(params[:id])
-    if @bug.update(project_params)
+    if @bug.update(bug_params)
       flash[:notice] = 'O bug foi atualizado com sucesso'
     else
       flash[:alert] = 'O bug não pode ser atualizado'
+      render 'edit'
+    end
+  end
+
+  def mark_as_solved
+    byebug
+    @bug = @project.bugs.find(params[:bug_id])
+    @bug.solved = true
+    if @bug.save
+      flash[:success] = 'O bug foi resolvido com sucesso'
+      redirect_to project_path(@project)
+    else
+      flash[:alert] = 'O bug não pode ser resolvido'
       render 'edit'
     end
   end
@@ -54,7 +67,7 @@ class BugsController < ApplicationController
   private
 
   def bug_params
-    params.require(:bug).permit(:title, :description, :status)
+    params.require(:bug).permit(:title, :description, :solved)
   end
 
   def set_project

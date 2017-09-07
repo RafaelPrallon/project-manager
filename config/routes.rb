@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  get "bugs/mark_as_solved", to: "bugs#marked_as_solved"
   resources :users
-  resources :projects do
+  resources :projects do 
     resources :bugs do
+      get "mark_as_solved", to: "bugs#mark_as_solved"
       resources :comments
     end
   end

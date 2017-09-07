@@ -3,10 +3,7 @@
       :html => {class: "form-horizontal", role: "form"} do |f| %>
   
     <div class='form-group'>
-      <div class='control-label col-md-2'>
-        <%= f.label :body, 'Novo comentário' %>
-      </div>
-      <div class='col-md-10'>
+      <div class='col-sm-12'>
         <%= f.text_area :body, rows: 5, class: 'form-control', placeholder: 'Seu comentário' %>
       </div>
     </div>

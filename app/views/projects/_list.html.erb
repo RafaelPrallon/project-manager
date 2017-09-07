@@ -10,22 +10,25 @@
   <tbody>
     <% obj.each do |project| %>
     <tr>
-      <td><%= link_to project.name, project_path(project) %></td>
+      <td><%= project.name %></td>
       <td><%= project.description %></td>
       <td><% project.users.each do |user| %>
             <%= user.full_name %>
           <% end %>
       </td>
-      <% if current_user == project.leader %>
-        <td>
+      <td>  
+        <%= link_to "Visualizar projeto", project_path(project), class:"btn btn-xs btn-success" %>
+        <% if current_user == project.leader %>
+        
           <%= link_to  "Editar", edit_project_path(project),
-                                     class:"btn btn-xs btn-success" %>
+                                     class:"btn btn-xs btn-warning" %>
           <%= link_to 'Apagar', project_path(project), 
                                 :method => :delete, 
                                 :data => { :confirm => "Tem certeza disso?" },
                                 :class => "btn btn-xs btn-danger" %>
-        </td>
-      <% end %>
+        <% end %>
+      </td>
+      
     </tr>
     <% end %>
   </tbody>

@@ -16,7 +16,10 @@
       <td><%= bug.comments.count %></td>
       <td><%= bug.solved? %></td>
       <td>
-        <%= link_to "Vizualizar", project_bug_path(@project, bug), class:"btn btn-xs btn-default"%>
+        <%= link_to "Visualizar", project_bug_path(@project, bug), class:"btn btn-xs btn-default"%>
+        <% if (current_user == @project.leader) && (bug.solved? == false) %>
+          <%= link_to "Marcar como resolvido", project_bug_mark_as_solved_path(@project, bug), class:"btn btn-xs btn-default" %>
+        <% end %>
         <%= link_to 'Apagar', project_bug_path(@project, bug), 
                               :method => :delete, 
                               :data => { :confirm => "Tem certeza disso?" },

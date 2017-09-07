@@ -6,6 +6,9 @@ class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  validates :name, presence: true
+  validates :description, presence: true
+
   def leader
     return self.users.first
   end
